@@ -131,12 +131,6 @@ impl Window {
         unsafe { ui_sys::uiWindowSetBorderless(self.uiWindow, borderless as c_int) }
     }
 
-    /// Moves the window to the center of the current screen
-    /// Note: This function is no longer exported and supported by libui itself but the implementation is still around.
-    pub fn center(&mut self, _ctx: &UI) {
-        unsafe { ui_sys::uiWindowCenter(self.uiWindow) }
-    }
-
     /// Sets the window's child widget. The window can only have one child widget at a time.
     pub fn set_child<T: Into<Control>>(&mut self, _ctx: &UI, child: T) {
         unsafe { ui_sys::uiWindowSetChild(self.uiWindow, child.into().as_ui_control()) }
