@@ -121,6 +121,16 @@ impl Window {
         unsafe { ui_sys::uiWindowSetMargined(self.uiWindow, margined as c_int) }
     }
 
+    /// Check whether or not this window is borderless
+    pub fn borderless(&self, _ctx: &UI) -> bool {
+        unsafe { ui_sys::uiWindowBorderless(self.uiWindow) != 0 }
+    }
+
+    /// Set whether or not the window is borderless.
+    pub fn set_borderless(&mut self, _ctx: &UI, borderless: bool) {
+        unsafe { ui_sys::uiWindowSetBorderless(self.uiWindow, borderless as c_int) }
+    }
+
     /// Sets the window's child widget. The window can only have one child widget at a time.
     pub fn set_child<T: Into<Control>>(&mut self, _ctx: &UI, child: T) {
         unsafe { ui_sys::uiWindowSetChild(self.uiWindow, child.into().as_ui_control()) }
