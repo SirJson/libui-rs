@@ -124,9 +124,20 @@ define_control! {
     sys_type: uiMultilineEntry
 }
 
+pub enum InputType
+{
+    Text,
+    Password,
+    Search
+}
+
 impl Entry {
-    pub fn new(_ctx: &UI) -> Entry {
-        unsafe { Entry::from_raw(ui_sys::uiNewEntry()) }
+    pub fn new(_ctx: &UI, type: InputType) -> Entry {
+        match type {
+            Text => unsafe { Entry::from_raw(ui_sys::uiNewEntry()) },
+            Password => unsafe { Entry::from_raw(ui_sys::uiNewPasswordEntry()) },
+            Search => unsafe { Entry::from_raw(ui_sys::uiNewSearchEntry()) },
+        }
     }
 }
 
