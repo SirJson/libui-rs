@@ -124,19 +124,18 @@ define_control! {
     sys_type: uiMultilineEntry
 }
 
-pub enum InputType
-{
+pub enum InputClass {
     Text,
     Password,
-    Search
+    Search,
 }
 
 impl Entry {
-    pub fn new(_ctx: &UI, type: InputType) -> Entry {
-        match type {
-            Text => unsafe { Entry::from_raw(ui_sys::uiNewEntry()) },
-            Password => unsafe { Entry::from_raw(ui_sys::uiNewPasswordEntry()) },
-            Search => unsafe { Entry::from_raw(ui_sys::uiNewSearchEntry()) },
+    pub fn new(_ctx: &UI, class: InputClass) -> Entry {
+        match class {
+            InputClass::Text => unsafe { Entry::from_raw(ui_sys::uiNewEntry()) },
+            InputClass::Password => unsafe { Entry::from_raw(ui_sys::uiNewPasswordEntry()) },
+            InputClass::Search => unsafe { Entry::from_raw(ui_sys::uiNewSearchEntry()) },
         }
     }
 }
@@ -322,7 +321,9 @@ impl RadioButtons {
 
     pub fn append(&self, _ctx: &UI, name: &str) {
         let c_string = CString::new(name.as_bytes().to_vec()).unwrap();
-        unsafe { ui_sys::uiRadioButtonsAppend(self.uiRadioButtons, c_string.as_ptr()); }
+        unsafe {
+            ui_sys::uiRadioButtonsAppend(self.uiRadioButtons, c_string.as_ptr());
+        }
     }
 
     pub fn selected(&self, _ctx: &UI) -> i32 {
@@ -330,7 +331,9 @@ impl RadioButtons {
     }
 
     pub fn set_selected(&mut self, _ctx: &UI, idx: i32) {
-        unsafe { ui_sys::uiRadioButtonsSetSelected(self.uiRadioButtons, idx); }
+        unsafe {
+            ui_sys::uiRadioButtonsSetSelected(self.uiRadioButtons, idx);
+        }
     }
 
     pub fn on_selected<'ctx, F: FnMut(i32) + 'ctx>(&self, _ctx: &'ctx UI, callback: F) {
