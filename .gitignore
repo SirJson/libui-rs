@@ -4,3 +4,11 @@ ui/target
 ui-sys/target
 iui/target
 target
+.idea/modules.xml
+.idea/encodings.xml
+.idea/libui-rs.iml
+.idea/misc.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/.name
+libiui-work.code-workspace

@@ -40,8 +40,8 @@
     #include "libui/ui_windows.h"
 #elif __APPLE__
     //TODO: Add typdefs for OSX
-#include "libui/ui_darwin.h"
+//#include "libui/ui_darwin.h"
 #else
     //TODO: Add typdefs for GTK/Linux
-#include "libui/ui_unix.h"
+//#include "libui/ui_unix.h"
 #endif
